@@ -10,12 +10,11 @@ import googleapiclient.discovery
 import spacy
 from spacy.cli import download
 
-# Load spaCy model
+# Load NLP model
 model_name = "en_core_web_md"
 try:
     nlp = spacy.load(model_name)
 except OSError:
-    print(f"Downloading {model_name}...")
     download(model_name)
     nlp = spacy.load(model_name)
 
@@ -23,7 +22,7 @@ except OSError:
 st_model = SentenceTransformer('all-MiniLM-L6-v2')
 
 # YouTube API Key (Replace with a new secured key)
-YOUTUBE_API_KEY = "AIzaSyBoRgw0WE_KzTVNUvH8d4MiTo1zZ2SqKPI"
+YOUTUBE_API_KEY = "YOUR_YOUTUBE_API_KEY"
 YOUTUBE_API_SERVICE_NAME = "youtube"
 YOUTUBE_API_VERSION = "v3"
 
@@ -41,7 +40,7 @@ def fetch_youtube_courses(skill):
     youtube = googleapiclient.discovery.build(YOUTUBE_API_SERVICE_NAME, YOUTUBE_API_VERSION, developerKey=YOUTUBE_API_KEY)
     request = youtube.search().list(q=f"{skill} course", part="snippet", maxResults=5, type="video")
     response = request.execute()
-
+    
     return [
         {"Title": item["snippet"]["title"], "Channel": item["snippet"]["channelTitle"], "Video Link": f'https://www.youtube.com/watch?v={item["id"]["videoId"]}'}
         for item in response["items"]
@@ -97,11 +96,6 @@ def plot_skill_distribution_pie(resume_skills, job_skills):
     axes[1].set_title("Job Required Skills Distribution")
     st.pyplot(fig)
 
-# Placeholder for saving analysis to database
-def save_analysis_to_db(resume_text, job_text, matching_score, resume_skills, job_skills, missing_skills):
-    # Implement your database saving logic here
-    pass
-
 # Streamlit UI
 st.title("📄 AI Resume Analyzer & Skill Enhancer")
 st.write("Upload your Resume and Job Description to analyze missing skills and get YouTube course recommendations!")
@@ -130,9 +124,6 @@ if resume_file and job_file:
         st.session_state.missing_skills = missing_skills
         st.session_state.matching_score = calculate_matching_score(resume_text, job_text)
 
-        # Save analysis to database
-        save_analysis_to_db(resume_text, job_text, st.session_state.matching_score, resume_skills, job_skills, missing_skills)
-
     if st.session_state.skills_analyzed:
         st.subheader("🔍 Extracted Skills")
         st.write(f"**Resume Skills:** {', '.join(st.session_state.resume_skills)}")
@@ -144,9 +135,7 @@ if resume_file and job_file:
         st.subheader("⚠️ Missing Skills")
         if st.session_state.missing_skills:
             st.write(f"You are missing: {', '.join(st.session_state.missing_skills)}")
-        else:
-            st.success("You have all the required skills!")
-
+        
         plot_skill_distribution_pie(st.session_state.resume_skills, st.session_state.job_skills)
 
         if st.button("📚 Get Recommended Courses"):
