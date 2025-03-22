@@ -1,34 +1,21 @@
-# Core Libraries
-numpy<2.0.0  # Downgrade NumPy to a version below 2.0
-
-# PyTorch and related dependencies (Make sure CUDA version is compatible)
+numpy<2.0.0
 torch==2.0.0
 torchvision==0.15.0
 torchaudio==2.0.0
-
-# Streamlit and Web Scraping
 streamlit
 requests
 beautifulsoup4
-
-# Data Processing & NLP
 pandas
 pdfplumber
 docx2txt
 unidecode
 python-dotenv
 nltk
-spacy<3.6.0  # Ensure compatibility with Thinc
+spacy<3.6.0
 spacy-lookups-data
 thinc==8.1.10
 scikit-learn
-
-# Sentence Embeddings & Transformers
 sentence-transformers
-transformers==4.28.0  # Ensure compatibility with sentence-transformers
-
-# Visualization
+transformers==4.28.0
 matplotlib
-
-# Google API (if needed for cloud functionalities)
 google-api-python-client
