@@ -1,0 +1,20 @@
+streamlit
+requests
+pandas
+pdfplumber
+docx2txt
+numpy<2.0.0  # Downgrade NumPy to a version below 2.0
+matplotlib
+sentence-transformers
+google-api-python-client
+spacy
+spacy-lookups-data
+thinc==8.1.10
+nltk
+scikit-learn
+beautifulsoup4
+unidecode
+python-dotenv
+torch==2.0.0  # Compatible PyTorch version
+torchvision==0.15.0  # Compatible torchvision version
+torchaudio==2.0.0  # Compatible torchaudio version
