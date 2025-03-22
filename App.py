@@ -1,3 +1,4 @@
+
 import streamlit as st
 import requests
 import pandas as pd
@@ -22,7 +23,7 @@ except OSError:
 st_model = SentenceTransformer('all-MiniLM-L6-v2')
 
 # YouTube API Key (Replace with a new secured key)
-YOUTUBE_API_KEY = "YOUR_YOUTUBE_API_KEY"
+YOUTUBE_API_KEY = "AIzaSyBoRgw0WE_KzTVNUvH8d4MiTo1zZ2SqKPI"
 YOUTUBE_API_SERVICE_NAME = "youtube"
 YOUTUBE_API_VERSION = "v3"
 
